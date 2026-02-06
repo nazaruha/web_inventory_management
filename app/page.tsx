@@ -13,7 +13,7 @@ export default function Home() {
               Sign In
             </Link>
             <Link href="#"
-              className="px-6 py-3 bg-white text-blue-600 rounded-md text-lg font-medium hover:bg-blue-700 border-2 border-blue-600 transition duration-300">
+              className="px-6 py-3 bg-white text-blue-600 rounded-md text-lg font-medium hover:bg-blue-700 hover:text-white border-2 border-blue-600 transition duration-300">
               Learn More
             </Link>
           </div>
