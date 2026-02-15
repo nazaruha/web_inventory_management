@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client"
+  previewFeatures = ["schemaEngineDriverAdapters"]
   output   = "../app/generated/prisma"
 }
 
