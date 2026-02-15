@@ -12,3 +12,19 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Product {
+  id          String   @id @default(uuid())
+  userId      String // Neon Auth User ID
+  name        String
+  sku         String   @unique
+  description String?
+  price       Decimal  @db.Decimal(10, 2)
+  quantity    Int      @default(0)
+  lowStockAt  Int? // Indicates the threshold for low stock notifications
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, name])
+  @@index([createdAt])
+}
