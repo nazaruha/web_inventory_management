@@ -1,6 +1,6 @@
-import { PrismaClient } from "../app/generated/prisma/client"
-import { PrismaPg } from "@prisma/adapter-pg"
-import { Pool } from "pg"
+import { PrismaClient } from '../app/generated/prisma/client'
+import { PrismaPg } from '@prisma/adapter-pg'
+import { Pool } from 'pg'
 
 // Neon requires SSL. This setup ensures the pool is ready before Prisma starts.
 const pool = new Pool({

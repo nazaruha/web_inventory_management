@@ -1,7 +1,9 @@
 Use Conventional Commits for commit messages. For example, use "feat: add new feature" for a new feature, "fix: fix a bug" for a bug fix, and "docs: update documentation" for documentation changes. This helps maintain a clear and consistent commit history.
-* Keep summaries under 50 characters, with detailed descriptions in the body if needed.
+
+- Keep summaries under 50 characters, with detailed descriptions in the body if needed.
 
 # Commit Types and their descriptions:
+
 - **feat**: A new feature for the user.
 - **fix**: A bug fix for the user.
 - **docs**: Documentation changes (such as README or other markdown files).

@@ -14,25 +14,27 @@ const createProducts = async () => {
       price: (i + 1) * 10,
       quantity: (i + 1) * 5,
       lowStockAt: 5,
-      createdAt: new Date(Date.now() - (productCount - i) * 1000 * 60 * 60 * 24),
+      createdAt: new Date(
+        Date.now() - (productCount - i) * 1000 * 60 * 60 * 24,
+      ),
     })),
   })
 
-  console.log("Seed data inserted successfully.");
+  console.log('Seed data inserted successfully.')
   console.log(`Inserted ${productCount} products for user ID: ${userId}`)
 }
 
 export async function main() {
-  console.log("Starting seed script...")
+  console.log('Starting seed script...')
   await createProducts()
 }
 
 main()
   .catch((e) => {
-    console.error("Seed Error:", e)
+    console.error('Seed Error:', e)
     process.exit(1)
   })
   .finally(async () => {
     await prisma.$disconnect()
     await pool.end() // IMPORTANT: Close the PG pool or the script will hang
-  });
+  })
