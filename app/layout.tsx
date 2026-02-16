@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <NeonAuthUIProvider 
           authClient={authClient}
-          redirectTo="/account/settings"
+          redirectTo="/"
           emailOTP
           social={{
             providers: ['google', 'github', 'vercel']
