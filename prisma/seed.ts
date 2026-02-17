@@ -1,4 +1,4 @@
-import { pool, prisma } from '@/lib/prisma'
+import prisma from '@/lib/prisma'
 import 'dotenv/config'
 
 const createProducts = async () => {
@@ -36,5 +36,4 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect()
-    await pool.end() // IMPORTANT: Close the PG pool or the script will hang
   })

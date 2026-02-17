@@ -1,17 +1,20 @@
-import { PrismaClient } from '../app/generated/prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
-import { Pool } from 'pg'
+import { PrismaClient } from '../app/generated/prisma/client'
 
-// Neon requires SSL. This setup ensures the pool is ready before Prisma starts.
-const pool = new Pool({
+const globalForPrisma = global as unknown as {
+  prisma: PrismaClient
+}
+
+const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
-  ssl: true, // Explicitly enforce SSL for Neon
 })
 
-const adapter = new PrismaPg(pool)
+const prisma =
+  globalForPrisma.prisma ||
+  new PrismaClient({
+    adapter,
+  })
 
-const prisma = new PrismaClient({
-  adapter,
-})
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
-export { prisma, pool }
+export default prisma
