@@ -1,5 +1,4 @@
-import { authClient } from '@/lib/auth/client'
-import { NeonAuthUIProvider } from '@neondatabase/auth/react'
+import Providers from '@/app/providers'
 import './globals.css'
 
 export default function RootLayout({
@@ -10,21 +9,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <NeonAuthUIProvider
-          authClient={authClient}
-          redirectTo="/"
-          emailOTP
-          social={{
-            providers: ['google', 'github', 'vercel'],
-          }}
-          credentials={{ forgotPassword: true, rememberMe: true }}
-          organization
-        >
-          <header className="flex h-16 items-center justify-end gap-4 p-4">
-            <UserButton size="icon" />
-          </header>
-          {children}
-        </NeonAuthUIProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
