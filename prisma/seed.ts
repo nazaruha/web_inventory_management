@@ -13,7 +13,7 @@ const createProducts = async () => {
       description: `Description for Product ${i + 1}`,
       price: (i + 1) * 10,
       quantity: (i + 1) * 5,
-      lowStockAt: 5,
+      lowStockAt: Math.floor(Math.random() * 10) + 1,
       createdAt: new Date(
         Date.now() - (productCount - i) * 1000 * 60 * 60 * 24,
       ),
