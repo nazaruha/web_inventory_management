@@ -1,5 +1,5 @@
 import { Routes } from '@/constants/routes'
-import { sidebarNavigations } from '@/constants/sidebar-navigations'
+import { sidebarNavigations } from '@/constants/sidebarNavigations'
 import SidebarNavigationListItem from './parts/SidebarNavigationListItem'
 
 interface SidebarNavigationListProps {
