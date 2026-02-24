@@ -9,7 +9,7 @@ export default async function DashboardPage() {
   const { user } = await requireUser()
 
   return (
-    <main className="ml-64 p-8">
+    <main className="ml-70 p-8">
       <Header
         title="Dashboard"
         description={`Welcome back to your inventory dashboard, ${user.name}!`}
