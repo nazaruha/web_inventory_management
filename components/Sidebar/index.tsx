@@ -1,9 +1,10 @@
+import { Routes } from '@/constants/routes'
 import SidebarNavigationList from './parts/SidebarNavigationList'
 import SidebarTitle from './parts/SidebarTitle'
 import SidebarUserButton from './parts/SidebarUserButton'
 
 export default function Sidebar({
-  currentPath = '/dashboard',
+  currentPath = Routes.DASHBOARD,
 }: {
   currentPath?: string
 }) {
