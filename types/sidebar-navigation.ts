@@ -1,6 +1,6 @@
 import { LucideIcon } from 'lucide-react'
 
-export type SidebarsSection = 'Main' | 'Inventory' | 'Add Product' | 'Settings'
+type SidebarsSection = 'Main' | 'Inventory' | 'Add Product' | 'Settings'
 
 export interface SidebarNavigation {
   readonly id: string
