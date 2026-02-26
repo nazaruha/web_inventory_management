@@ -5,7 +5,7 @@ export const productsTableHeaderList = [
   'Price',
   'Quantity',
   'Low Stock At',
-  'Created',
-  'Updated',
+  'Created At',
+  'Updated At',
   'Actions',
 ]
