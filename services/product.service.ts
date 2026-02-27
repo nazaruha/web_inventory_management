@@ -1,5 +1,7 @@
+import { Prisma } from '@/app/generated/prisma/client'
 import { defaultLowStockAt } from '@/constants/defaultLowStockAt'
 import prisma from '@/lib/prisma'
+import { ProductsSearchByValue } from '@/types/productsSearchByValue'
 
 export const getTotalProductCount = async (userId: string) => {
   const count = await prisma.product.count({ where: { userId } })
@@ -73,6 +75,28 @@ export const getTotalInventoryValue = async (userId: string) => {
   }, 0)
 }
 
-export const getAllProductsByUserId = async (userId: string) => {
-  return await prisma.product.findMany({ where: { userId } })
+export const getAllProductsByUserId = async (
+  userId: string,
+  searchParams?: Promise<{ query: string; searchBy: ProductsSearchByValue }>,
+) => {
+  const params = await searchParams
+
+  const where: Prisma.ProductWhereInput = { userId }
+
+  if (params?.query && params.searchBy) {
+    const { query, searchBy } = params
+
+    if (searchBy === 'createdAt' || searchBy === 'updatedAt') {
+      where[searchBy] = { gte: new Date(query) }
+    } else if (['price', 'quantity', 'lowStockAt'].includes(searchBy)) {
+      where[searchBy] = Number(query)
+    } else {
+      where[searchBy] = {
+        contains: query,
+        mode: 'insensitive',
+      }
+    }
+  }
+
+  return await prisma.product.findMany({ where })
 }
