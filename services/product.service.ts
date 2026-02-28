@@ -1,5 +1,6 @@
 import { Prisma } from '@/app/generated/prisma/client'
 import { defaultLowStockAt } from '@/constants/defaultLowStockAt'
+import { requireUser } from '@/lib/auth/server'
 import prisma from '@/lib/prisma'
 import { ProductsSearchByValue } from '@/types/productsSearchByValue'
 
@@ -75,13 +76,18 @@ export const getTotalInventoryValue = async (userId: string) => {
   }, 0)
 }
 
-export const getAllProductsByUserId = async (
-  userId: string,
-  searchParams?: Promise<{ query: string; searchBy: ProductsSearchByValue }>,
-) => {
+export const getAllProductsByUserId = async (userId: string) => {
+  return await prisma.product.findMany({ where: { userId } })
+}
+
+export const getFilterForProducts = async (
+  searchParams: Promise<{ query: string; searchBy: ProductsSearchByValue }>,
+): Promise<Prisma.ProductWhereInput> => {
+  const { user } = await requireUser()
+
   const params = await searchParams
 
-  const where: Prisma.ProductWhereInput = { userId }
+  const where: Prisma.ProductWhereInput = { userId: user.id }
 
   if (params?.query && params.searchBy) {
     const { query, searchBy } = params
@@ -98,5 +104,5 @@ export const getAllProductsByUserId = async (
     }
   }
 
-  return await prisma.product.findMany({ where })
+  return where
 }
