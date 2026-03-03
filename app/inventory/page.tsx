@@ -1,16 +1,13 @@
 import ProductsSearchForm from '@/components/Inventory/ProductsSearchForm'
 import { ProductsTable } from '@/components/Inventory/ProductsTable'
 import Header from '@/components/ui/Header'
-import { ProductsSearchByValue } from '@/types/productsSearchByValue'
+import { InventoryPageSearchParams } from '@/types/inventoryPageSearchParams'
 
 export default async function InventoryPage({
   searchParams,
 }: {
-  searchParams: Promise<{ query: string; searchBy: ProductsSearchByValue }>
+  searchParams: Promise<InventoryPageSearchParams>
 }) {
-  console.log('Search Params')
-  console.log(await searchParams)
-
   return (
     <main className="ml-70 p-8">
       <Header

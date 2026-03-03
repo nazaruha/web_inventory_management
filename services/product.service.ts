@@ -2,7 +2,7 @@ import { Prisma } from '@/app/generated/prisma/client'
 import { defaultLowStockAt } from '@/constants/defaultLowStockAt'
 import { requireUser } from '@/lib/auth/server'
 import prisma from '@/lib/prisma'
-import { ProductsSearchByValue } from '@/types/productsSearchByValue'
+import { InventoryPageSearchParams } from '@/types/inventoryPageSearchParams'
 
 export const getTotalProductCount = async (userId: string) => {
   const count = await prisma.product.count({ where: { userId } })
@@ -81,16 +81,14 @@ export const getAllProductsByUserId = async (userId: string) => {
 }
 
 export const getFilterForProducts = async (
-  searchParams: Promise<{ query: string; searchBy: ProductsSearchByValue }>,
+  searchParams: InventoryPageSearchParams,
 ): Promise<Prisma.ProductWhereInput> => {
   const { user } = await requireUser()
 
-  const params = await searchParams
-
   const where: Prisma.ProductWhereInput = { userId: user.id }
 
-  if (params?.query && params.searchBy) {
-    const { query, searchBy } = params
+  if (searchParams?.query && searchParams.searchBy) {
+    const { query, searchBy } = searchParams
 
     if (searchBy === 'createdAt' || searchBy === 'updatedAt') {
       where[searchBy] = { gte: new Date(query) }
