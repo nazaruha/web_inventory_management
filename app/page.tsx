@@ -1,6 +1,15 @@
+import { Routes } from '@/constants/routes'
+import { auth } from '@/lib/auth/server'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
-export default function Home() {
+export const dynamic = 'force-dynamic'
+
+export default async function Home() {
+  const { data: session } = await auth.getSession()
+
+  if (session?.user) redirect(Routes.DASHBOARD)
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-16">
